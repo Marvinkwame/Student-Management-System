@@ -1,0 +1,67 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #1d2634;
+  color: #9e9ea4;
+  font-family: "Montserrat", sans-serif;
+}
+
+.hero {
+  background-image: url("../admission.webp");
+  background-color: #1d2634;
+  color: white;
+  padding-block: 10rem;
+  background-repeat: no-repeat;
+  background-blend-mode: multiply;
+  background-size: cover;
+  text-align: center;
+}
+
+.container {
+  max-width: 960px;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+.form-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5rem;
+  padding-block: 5rem;
+}
+
+form {
+  background-color: #323235;
+  max-width: 100%;
+  width: 500px;
+  display: grid;
+  row-gap: 2rem;
+  padding: 30px 40px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.form-group input {
+  border: 2px solid #f0f0f0;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 14px;
+  display: block;
+  width: 95%;
+}
+
+form button {
+  background-color: #67cc14;
+  border: 2px solid #67cc14;
+  border-radius: 3px;
+  color: #fff;
+  font-size: 15px;
+  display: block;
+  width: 100%;
+  padding: 10px;
+}
