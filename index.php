@@ -48,7 +48,7 @@
                         <a class="hover:text-gray-500" href="#">Contact</a>
                     </li>
                     <li>
-                        <a class="hover:text-gray-500" href="admission.php">Admission</a>
+                        <a class="hover:text-gray-500" href="admission_page.php">Admission</a>
                     </li>
 
                 </ul>

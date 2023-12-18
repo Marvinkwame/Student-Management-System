@@ -111,11 +111,11 @@ if (isset($_POST['add_student'])) {
 
         <!-- Main -->
         <main class="main-container">
-            <div class="main-title">
+            <div class="main-title text-center text-2xl">
                 <h2>ADD STUDENT</h2>
             </div>
 
-            <div class="flex flex-col border-4 items-center h-screen justify-center">
+            <div class="flex flex-col items-center h-screen justify-center">
                 <form action="#" class="grid gap-8 place-items-center" method="POST">
 
                     <div class="grid">

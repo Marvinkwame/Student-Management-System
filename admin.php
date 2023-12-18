@@ -87,7 +87,6 @@ $result = mysqli_query($connection, $sql);
       </div>
 
       <div class="p-5 h-screen">
-        <h1 class="text-xl mb-2">Your orders</h1>
 
         <div class="overflow-auto rounded-lg shadow hidden md:block">
           <table class="w-full">
@@ -96,7 +95,7 @@ $result = mysqli_query($connection, $sql);
                 <th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">Name</th>
                 <th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">Email</th>
                 <th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">Phone</th>
-                <th class="p-3 w-24 text-sm font-semibold tracking-wide text-left">Details</th>
+                <th class="p-3 w-24 text-sm font-semibold tracking-wide text-left">Message</th>
               </tr>
             </thead>
 

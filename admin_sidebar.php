@@ -9,36 +9,36 @@
 
         <ul class="sidebar-list">
           <li class="sidebar-list-item">
-            <a href="admin.php" target="_blank"> Dashboard
+            <a href="admin.php" > Dashboard
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="add_student.php" target="_blank">
+            <a href="add_student.php" >
               Add Student
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="#" target="_blank">
+            <a href="view_student.php" >
                View Student
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="#" target="_blank">
+            <a href="#" >
               Add Teacher
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="#" target="_blank">
+            <a href="#" >
                View Teacher
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="#" target="_blank">
+            <a href="#">
                Add Course
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="#" target="_blank">
+            <a href="#">
                View Course
             </a>
           </li>
