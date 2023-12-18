@@ -13,7 +13,7 @@
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="#" target="_blank">
+            <a href="add_student.php" target="_blank">
               Add Student
             </a>
           </li>
