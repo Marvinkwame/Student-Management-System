@@ -2,12 +2,14 @@
 
 session_start();
 
+error_reporting(0);
+
 if (!isset($_SESSION['username'])) {
     header('location:login.php');
-  } elseif ($_SESSION['usertype'] == "student") {
+} elseif ($_SESSION['usertype'] == "student") {
     header("location:login.php");
-  }
-  
+}
+
 
 $host = 'localhost';
 
@@ -86,8 +88,18 @@ $result = mysqli_query($connection, $sql);
             <div class="main-title">
             </div>
 
-            <div class="p-5 h-screen">
+            <div class="p-5 h-screen text-center">
                 <h1 class="text-xl text-center mb-2">View Student</h1>
+
+                <?php
+                
+                if($_SESSION['student_message']) {
+                    echo $_SESSION['student_message'];
+                }
+
+                unset($_SESSION['student_message']);
+
+                ?>
 
                 <div class="overflow-auto rounded-lg shadow hidden md:block">
                     <table class="w-full">
@@ -97,6 +109,8 @@ $result = mysqli_query($connection, $sql);
                                 <th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">Email</th>
                                 <th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">Phone</th>
                                 <th class="p-3 w-24 text-sm font-semibold tracking-wide text-left">password</th>
+                                <th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">Delete</th>
+                                <th class="w-24 p-3 text-sm font-semibold tracking-wide text-left">Update</th>
                             </tr>
                         </thead>
 
@@ -132,6 +146,23 @@ $result = mysqli_query($connection, $sql);
 
                                         ?>
                                     </td>
+
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                                        <?php
+                                        echo "<a onClick=\" javascript:return confirm('Are You Sure You Want To Perform This Action'); \" 
+                                         href='delete_student.php?student_id={$info['id']}'>Delete</a>"
+
+                                        ?>
+                                    </td>
+
+                                    <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
+                                        <?php
+                                        echo "<a  
+                                         href='update_student.php?student_id={$info['id']}'>Update</a>"
+
+                                        ?>
+                                    </td>
+
                                 </tr>
 
 
@@ -148,7 +179,7 @@ $result = mysqli_query($connection, $sql);
 
 
             </div>
-
+            
 
 
         </main>
