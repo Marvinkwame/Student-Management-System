@@ -1,3 +1,28 @@
+<?php
+
+$host = 'localhost';
+
+$user = 'root';
+
+$passdb = '';
+
+$db = 'school_project';
+
+$connection = mysqli_connect($host, $user, $passdb, $db);
+
+// Check connection
+if (!$connection) {
+    die("Connection failed: " . mysqli_connect_error());
+}
+
+
+$sql = "SELECT * FROM teachers";
+
+$result = mysqli_query($connection, $sql);
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -137,20 +162,22 @@
                     <h1 class="font-bold text-3xl ">Our Distinguished Tutors</h1>
 
                     <div class="flex flex-col lg:flex-row items-center gap-16 justify-center mt-8">
-                        <div>
-                            <img class="h-[240px] w-[260px] bg-contain" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSJS8f0JnKwHdXogN0ACXsv-cRtHSuuZ1Ohw&usqp=CAU" alt="">
-                            <p>Cosmo Kramer</p>
-                        </div>
+                        <?php
 
-                        <div>
-                            <img class="h-[240px] w-[260px] bg-cover" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuR7cOI2glUnxDxX4ykLtAF71WpXEiSNzXcA&usqp=CAU" alt="">
-                            <p>George Costanza</p>
-                        </div>
+                        while ($info = $result->fetch_assoc()) {
+                        ?>
 
-                        <div>
-                            <img class="h-[240px] w-[260px] bg-cover" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAoHCBYWFRgWFhUZGRgaHBwaGBocGBoaGBoaGhoaGhgaHBgcIS4lHCErIRgaJjgmKy8xNTU1GiQ7QDs0Py40NTEBDAwMEA8QHhISHjQhISE0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NDQ0NP/AABEIALcBEwMBIgACEQEDEQH/xAAcAAABBQEBAQAAAAAAAAAAAAACAAEDBAYFBwj/xAA9EAACAQIEAwUHAgQEBwEAAAABAgADEQQSITEFQVEGImFxgRMyUpGhscEHQmJy0fAUI6LhFTRDgpKy8TP/xAAYAQADAQEAAAAAAAAAAAAAAAAAAQIDBP/EACARAQEAAgIDAAMBAAAAAAAAAAABAhEDIRIxQSIyURP/2gAMAwEAAhEDEQA/AJnXWEu0N11iXYzkblEoiSEIEYCEyxRxABWOy3iO8IQgrD9qeHWOcCZaeqcTwodCLTzfiGFyOR4zfDLpOU+qyGSK0gBkyLzlWHjSaRFZfTD3Qt02HMyLPlFzboPO28JDtQGgRpLCYVd2ZR5n8D8ytVqs3e2IHzHhKzuTvK0ncdFqKDdx6a6QvbU9Bc2Hhb6zlh4BeGh5OzQdS2+nK9h/9k7UbG2h8RzmezywmKYDfy8PKK47Vjm6+JpkLynHqDWXqONuO9r9/GRVaYOo2+smTSrdxUaCYbpAMpnTLHaMsJoCGBjR7RoBINoMLlBIgKeAYYgtAVG0QJjiIGNJZjFCvFA3tltYBXUyVomXWcqkNMbxWhItjCIgewmOskyRikCA6xrSS0bLAI7TIdqeHfvAmyKyhxKkHUgjlKxujeYU6dzaTZCNtz9hLWKCox56znGv/tNp2V1ErYgpcc9tCJQZrx3a5vBtLRaRc2tIiZLaNkgSKM0m9mYLJAaRmINCyxrREnw1SxllKljbrOeDDDxWLxy0tVACNtZAwh0n3hut9fxBftXEJorRNBJo1o8cCAEIJhWjGBnEFoQjGARCPEI8aTRR7RQD29qqXteOaqfFPK8Txupnchv3G3zkZ41V+KY+FPcere0TfNGNVPinlX/GqnxRf8ZqfFD/ADo3HrHtl6wvbp1nk443V+KJuM1fih4U9x6mcUg5iVqmPQH3h855e/FanxSMY5z+4x/5luPTn4onxfWcniPGFF8pExAxLnmYqlQ23h4rliHE1izEmVzHMSLNZ0yt3SAl3h/C6lY2RSevlAwmGLsAOs9k7HcKSkgJAzHmZGefirHDfbC4bsNVHvkDy1lk9kQul7z0biLqNhOM9Sc2XJk6McIx7dlgJWfssOs2TveQARf6Zr8Mb8YHH9nyl7azg18OVOonq2JpaXmb4twoMLrv0mmHNfVRlwyzphssa0uYnDlTaVSJ0725bjq6JHsZcBuBKRk+HeKnjfgmEFpM4vInEUVUccGMY4EYGIxEQiMAV4xiMcwCMR4o8adBvFHiiGh1DqfOCWjs2pgExhcw+Hz6CBiEytlnR4CLv6SHjYtVPpImV8tNLjPHbnwhAvCDy2chmjoYDNGEAsI0kqv3bSujco9dtItHL0C8s0E36yvTFzJ1bWOljGq7JcPu4cjQa+Z5T0WnUygW/pM72bpZaY8QJpyqKuZ2A9ZyZXddOtTSjiahMos0PFcTp7Kwv5iUf8SDM7GkTs0SmV2qW1lKpxtUO1z9ITG30brVaZtzlKpTvBpcbdwQKf1A+8b/ABFzZlKHx2PkYXGw5WY4/hf3W85mXWeg4+gHUg85gsUmVyvQzp4ctzTn5sddqzQqe8Yx1E2c89rTNsRISbybIRygOPD5RNERiEJhGgR1iMZY5gDRGOIoAAj3iyxFIEb1iiyRQHaNm1MSmC+8Sxodvgj5XuekrcZqZqjGWeF07iQ8Vo2Mzn7Nr+rm5os0G0e00ZHzRZowEcCASKYTbQQskRLxKkAjQ0bUecjI1hCMR63hO5TQjXui3nYbzOcZ4khazNmPM3OUHwAljBcR9rRRFvcJd/lYAdRM8nDHd2ZhZRfU6A/PfynNjO+3Td63EaVQzaX/APID7mdrhdcuyqut/wAbzjYPBBcxcA2BtrqTytrYWnY7N4QmpTFjckkXAsRewv8AFa1/pKyk0Mcr9jtZ1KEhgeWhmU4piCrWUb7Nz9JruOcLDE5bhxfKx5nofOZ5sM5VWy5indOn0PQzLCza73OnEoYqoTdWc8tLchfbnsZ18BxlnGR7Ec9Lbc/OLAYIKxZUbNra7aKTvpaWxw5UUs/vt7qruT4j8zXLLFOMynsdTiNJRZqmu+xPlsJjOJVA1RiNr6aWm7o8NVQGYagaA8v95mO01Ae0BGlx9pPFlj5dFzY24uDaHTFpLWoZVBvvBQ2nRtzeOr2npJqNYVSieRuJGr9ZLTxI6RXa8bPqo662taBLuKAbvc+cqMISjKaMojxARo0laKKKAPeNeK0RgZs0UVvGKBICNY6iJt5JR3jRI0HAaGZ1WR9qqOSoF5WvIeFVz7QEHaSdojdwSdZhJfNvf0cOK0eK03YkIQjCEICDRZITYaQUEI7RLiELcwgsddIZeG06eg9nMIK2Gp8mTMAQbczpcTqOxVcmJRsg2cJe382XT1E5fYlyiOh5EMPJh/tNFiMbcWPynJldZV1SXTmUcDhm1pKaljvqF9SfxedDAUV/xIC2uqZjYaAsQAFHIAD6mcuu2S709DzX9p9ORlXB8UKB6jBizFQcvJRfaG9xXi2fFcKj0mdTdwbkdRMocPds6GxPvWO/psfWA3GGZQUzMeg3PzkuDrZwTlKkbg8j0md3FTHRPQUjVnBve4VQftFhcCiEubsx2Le9blLIqGA7RXKnMUNd5ku0iXdOW81rrpM5xajmYXGwP4l8d1Sym5pxeJ0wEsBsBre85aGdLimVQFA/r6zmCdmHpycns7PGU215RmaPl0EpntOW0kJMNmNrQCB6/SQ0pxGhcoF5SacCOViWNeBhIijmKBBsYoWkUAgO8dTOueHL1lbEYZU56xTKXoeFgcDmzaRcRqMW70tcEIzi+0HjuXP3beMW/wAlWfi5l495HeODLZbHeODAjrAbWFfSEHEhEMWA316RNNjt9YDmxI6Qi0B4Qq3PY/iCuVW/eCZCOZANwfGaCumpnnHZpiMTTIYLY3JOwFje/pPSarjec3LjrJ0ceW4gShmNp1bIqFbLbne1vM3nPFcIC3QTgY2pVrC2YIlzqx1Y+XOTjNrstXqj0c5daqi3IbeUu0MQrDukEeEyh4ag/wCoD9PzJcNgiCMjm/zEMsJ/VyNOTyhBZRwzOB3yD4gW+ksipMaIWIOky3G6zhwENiQzMbX0UXmjrvpMTx3F/wCcADoosfHnb7Tbhx3kjly1i47uSbk3MjLQnckkncm59YL+E7HESydFGgkCS3hnt0PnCjFbpYQHncfW0Ktw/Qle8PDf5RqOIYEa2vyO3zlinVyPm166H+7zO7bzWnMKrAKCX+JOjtmUWJOttpRtHKVgcoiyDrHIjEQLRxTHWN7LxhIIiIdnqfwPsfGKPFDdLU/hV8ac2m0rVqpY6yJt44MqSRjcrU9ByDGrvc3g04Lx6PfQQIQjR4EUJYJkiD6wOCWEF1kiLyhVVk7X4oSdYLmEBImjias8PxjUnDqbGxHXQggjXzm37P8AFBVpBSe+mjeI5GeeAyxhcU9NgyGxH18DJzw8oeGfjXpFVidI9VWcZQL+k4nBuN+0OUrZgL+B8poaOKW1wbTmuNx9uuZSzcVhwQjVso8OcnTD5RpCfiAPOAcUJF2rvQWXxglwJBVr9JXyM3OEx/o2mr1r6D5zDcT/AP1fzm9fCZE+8xHEcKxd2AuAdZtw2bZc0/FzW3gk2MmKyNhOlyWFeS0nkCiGum8BKvB9OvnGWr/d5WRpZy5luOW/9ZNjWUi14JEKku49YnES/iONHjGBCUxjFHtAwxQooE55iURyI6iaOcawXkiiCwgdRwoWWEBEIC0moaG8HLJ6C9IqePtKtukGo399JYWgYDYZzspPoZLWqxNpCwlmrSZdxaQWlRllUeWEElrC4VnYIouSbTccF7LqnefU8tNIWlIzPAMMyVUYjQ6ehmlqUSrleuo/M7J4ciupy6a6ehlfGUr2I3Go8pz8t7ldPFetOK5INj9o6KT1l2qOdokPhM7W8RrQ6y/g6Q3jUkvLaqBIypI8StxOfheGXps1tGc+vKdKqdDNRS4SEoU1O5Fz5nX8y+G6rLmy1HkfHuz7Jd1HdmbKT3PFcMDA5hodJhOP9kst3p+ZX+k6scnNe2FtrCOxFvKS1EsSOmkC0stgQ2lqjUte3MSBaRkwo9IqrHYqbagx38PWHQwrObARqVBmuANQZLSVFaMRLT4Vx+0wGwz/AAmBoRETCKHoYJXwgNmtFHigFIiOohEQkGs0c8EiwGXWdPh2GDuAdoXGsIqOAsnym9KuN8duWFhBY4WSKsaUYWdbgHB3xNVaVMXY6k8lUbsfCc9UnqP6X4LJQrVrd52FNT/Cou1vU/SLK9DbScD7CYahlZgajjm3u38F2lbtDwkoMqAZblrAAWJ5Xmxw40B8Jy+0jd0fM+QknuvBuPj/ADmFrW0t4zmrTnQ4pVz1Xfqx+V9JZ7PcIbE10or+46n4VGrH5S/iLd1qewnArIazrq+iXGy8yPM/abc4UaaeU7mE4UiKqjUIAF6AAW2k9XDAzO7W4mBwQZzddAp+0xRqZl8iQfQkfierU6ICmeLGoUq1FOgzt6d4zLkm424fdWKw0jUbQqpsJAsy+OqOghtJPaSlSfW0nqEyLCWsAhqVkT4mF/Ian6CelVKVx5bTEdhMKXrPUO1Nco/mbf6D6zfMJthjqOXmu8tfxy6mCvvKOP4aMvd3nafeI0wZe2T577U4PJiXUCwuDbzAM46ixmx/Uillxrj+FPtMnlm+PcRbqpMNhjUdUS5ZjZVtcknynovCv08UJeqXLnfIRZfTnI/0p4OHd8Qw93uJpzPvH7D1M9aUraTlfi5XifaLsw2GIdGYjexFmB8Le8Jx+HFQ1yQCd/Oe+Y/htOuhR0up16EHqDPK+2nY56F6qd5OelmHiRzEjtrjlPrhYmsAdwZAcWToQPlIcTgWyh7gdxW873t9BIV1W8dljbG434vistwco0j0UVtMgN5y/aESbC4hs1hFur8ca0lLswWAYINdd4pzW49UXu5zppFHuMvGsYRCWNDmzkWcLWym8DEVS7XMiAhgSdd7VcrrRKIarBWdbs/w04jEU6INs7WJ6Ddj8gY0J+zPAXxdZaaCy7u3JV5nz6T258ElCgtNFsiCw/r5mS8J4ZRwyZKKBR+4/uY9Secl4qt0kW7VE1B9B5D7TNdusTkoO/8ACQPM6D7zs8OrXUDmNJkf1XxAWhTTm739FH9SIp3Q8nAnrf6U8FyUmxLDvVO6nggOp9T9p5jwnANXqpST3nYL5X3PoLn0n0RhMMtNEpoLKihR5AWl5X4mRMIxEUV5Kzv7pnmHbbhuSoKqjR9G/mHP++k9MY30+c4navh3tcO9hqozL/26n6XmeS+PLWTzvDd9B1XSM1KwvLvDaYAPjOhSw2Yi4vOa3t2enDwuFa+Yiw5E85fakTZVF2YgAdSdAJ0sSvLpOv2Y4aGb2zDRbhPFuZ9ISeWRZ5eM26fZrhRw9EI3vElmPiZ1XMe8YredGnFbvtXbeSLHNIxgIaJ4v+qH/Pv/ACJ/6zH2mx/U9bY5/FEP+m34mPnRh+rPL29o/TynkwiW5gsfU3mrwbZgSdrzN9nv8vBU+uQfUTR4BMqKPAX/ADMr7q1v2guB1lfiCBlKkXGxB2IO8HN+7zt9IFJ7k3hcutB49234a+HqWF/Zstk8FH7fS8zGfpPcO1PAxisOyW763ZD/ABDl67Tw56YBIIII0I6EaERzuNcMqBWuZfTDMFzqCep5Cc4NN9wTG0Rg2pva+uvM3j00md0zC8HVu8amp1OsaHUqUwTFEvUZaEIopq4RqI4iiiCRBPUf007MOrDFVAApB9mLgkk6Em22n3iik5ehi3oJz2vv+IeKa6eUUUz+KczCMVeeffqjjM2JROSJ9WN/wI0UvH2MvTufpRwRbNimsSSUTwA94+fL5z0jSKKGXsT0VxGJiik0zrYRVaYKkHYgg+sUUXw3l5QozL8LEfI2nWw7WF4opyV3fACiWYKN2IA8zN1hqCoiouyi39TFFNeL6w5viUCORFFN4wK0jYR4oX0HkX6t0LYlG+OmP9LEfmYCKKa4fqzvt7XhmulBORCfIKDNW2igddPnFFMcva0VZtgNhI0GsUUQW76+c8e/Urgy0sT7RNBVBa3LMPf+dwfUx4pcOe2HB1tLC1Da14oo60wRXiiiktX/2Q==" alt="">
-                            <p>Elaine Bennes</p>
-                        </div>
+
+                            <div>
+                                <img class="h-[240px] w-[260px] bg-contain" src="<?php echo "{$info['image']}"  ?>" alt="">
+                                <p><?php echo "{$info['name']}"  ?></p>
+                                <p><?php echo "{$info['description']}"  ?></p>
+                            </div>
+                        <?php
+
+                        }
+                        ?>
+
                     </div>
                 </div>
             </div>

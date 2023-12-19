@@ -28,7 +28,7 @@
             </a>
           </li>
           <li class="sidebar-list-item">
-            <a href="#" >
+            <a href="view_teacher.php" >
                View Teacher
             </a>
           </li>
