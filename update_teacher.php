@@ -2,6 +2,7 @@
 
 session_start();
 
+
 if (!isset($_SESSION['username'])) {
     header('location:login.php');
 } elseif ($_SESSION['usertype'] == "student") {
@@ -18,48 +19,46 @@ $db = 'school_project';
 
 $connection = mysqli_connect($host, $user, $passdb, $db);
 
-// Check connection
-if (!$connection) {
-    die("Connection failed: " . mysqli_connect_error());
-}
+$id = $_GET['teacher_id'];
 
-if (isset($_POST['create_teacher'])) {
-    $teacher_name = $_POST['username'];
-    $teacher_desc = $_POST['description'];
-    $teacher_image = $_FILES['image']['name'];
-    $dst = "./image/".$teacher_image;
-    $dst_db = "image/".$teacher_image;
+$sql = "SELECT * FROM teachers  WHERE id = '$id' ";
+
+$result = mysqli_query($connection, $sql);
+
+$info = $result->fetch_assoc(); //use it for the values for the forms $info['name']
+
+if (isset($_POST['update_teacher'])) {
+    $updated_name = $_POST['username'];
+    $updated_desc = $_POST['description'];
+    $updated_image = $_FILES['image']['name'];
+    $dst = "./image/" . $updated_image;
+    $dst_db =  "image/" . $updated_image;
 
     move_uploaded_file($_FILES['image']['tmp_name'], $dst);
 
-    //check if there is a teacher with the same name in the db
-    $check_db = "SELECT * from teachers WHERE name = '$teacher_name' ";
-
-    $db_check = mysqli_query($connection, $check_db);
-
-    $row_count = mysqli_num_rows($db_check);
-
-    if ($row_count == 1) {
-        echo " <script type='text/javascript'> alert('Teacher Already Exists')  </script>";
+    if ($updated_image) {
+        $sql_update = "UPDATE teachers SET 
+    name = '$updated_name', 
+    description = '$updated_desc',
+    image = '$dst_db'
+    WHERE id = '$id' ";
     } else {
-        $sql = "INSERT INTO teachers (name, description, image) VALUES(
-            '$teacher_name',
-            '$teacher_desc',
-            '$dst_db'
-        )";
-
-        $result = mysqli_query($connection, $sql);
+        $sql_update = "UPDATE teachers SET 
+    name = '$updated_name', 
+    description = '$updated_desc'
+    WHERE id = '$id' ";
     }
 
-    if ($result) {
-        echo " <script type='text/javascript'> alert('Teacher Added Successfully')</script>";
-        header('location:add_teacher.php');
-    } else {
-        echo 'Teacher Added Unsuccessful';
+
+    $result_update = mysqli_query($connection, $sql_update);
+
+    if ($result_update) {
+        echo "<script>alert('Update Successful')</script>";
+        header("location:view_teacher.php");
     }
 }
-
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -67,9 +66,9 @@ if (isset($_POST['create_teacher'])) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <title>Admin Dashboard</title>
-
+    <title>Update Student</title>
     <script src="https://cdn.tailwindcss.com"></script>
+
     <!-- Montserrat Font -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
@@ -108,37 +107,46 @@ if (isset($_POST['create_teacher'])) {
 
         ?>
 
+
         <!-- Main -->
         <main class="main-container">
-            <div class="text-center text-2xl">
-                <h2>ADD TEACHER</h2>
+            <div class="main-title">
+                <h2>Update Student</h2>
             </div>
 
+
             <div class="flex flex-col items-center h-screen justify-center">
-                <form action="#" class="grid gap-8 place-items-center" enctype="multipart/form-data" method="POST">
+                <form action="#" class="grid gap-8 place-items-center" method="POST" enctype="multipart/form-data">
 
                     <div class="grid">
-                        <label for="username" class="font-semibold">Username</label>
-                        <input type="text" class="p-[10px] text-xl text-black" name="username" id="">
+                        <label for="name" class="font-semibold">Name</label>
+                        <input type="text" value="<?php echo "{$info['name']}" ?>" class="p-[10px] text-xl text-black" name="username" id="">
                     </div>
 
                     <div class="grid">
-                        <label for="phone" class="font-semibold">Description</label>
-                        <input type="text" class="p-[10px] text-xl text-black" name="description" id="">
+                        <label for="description" class="font-semibold">Description</label>
+                        <input type="text" name="description" class="p-[10px] text-xl text-black" value=" <?php echo "{$info['description']}" ?>" id="">
+
                     </div>
 
-                    <div class="grid place-items-center border-2">
-                        <label for="email" class="font-semibold">Image</label>
-                        <input type="file" class="p-[10px]" name="image" alt="">
+                    <div class="grid">
+                        <label for="email" class="font-semibold">Old Image:</label>
+                        <img class="h-[104px] w-[160px]" src="<?php echo "{$info['image']}" ?>" alt="">
+
                     </div>
+
+                    <div class="grid">
+                        <label for="email" class="font-semibold">New Image:</label>
+                        <input type="file" name="image" id="">
+                    </div>
+
+
 
                     <div class="bg-orange-400 p-2 w-3rem] text-center cursor rounded-[.5rem]">
-                        <input type="submit" name="create_teacher" value="Create Teacher">
+                        <input type="submit" name="update_teacher" value="Update Teacher Profile">
                     </div>
                 </form>
             </div>
-
-
 
         </main>
         <!-- End Main -->
@@ -149,7 +157,7 @@ if (isset($_POST['create_teacher'])) {
     <!-- ApexCharts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.5/apexcharts.min.js"></script>
     <!-- Custom JS -->
-    <script src="/js/script.js"></script>
+    <script src="js/scripts.js"></script>
 </body>
 
 </html>

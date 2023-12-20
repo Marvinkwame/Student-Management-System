@@ -145,7 +145,7 @@ $result = mysqli_query($connection, $sql);
                                     <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
                                         <?php
                                         echo "<a  
-                                         href='update_student.php?teacher_id={$info['id']}'>Update</a>"
+                                         href='update_teacher.php?teacher_id={$info['id']}'>Update</a>"
 
                                         ?>
                                     </td>
