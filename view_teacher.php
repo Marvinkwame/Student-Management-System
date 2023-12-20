@@ -89,7 +89,7 @@ $result = mysqli_query($connection, $sql);
             </div>
 
             <div class="p-5 h-screen text-center">
-                <h1 class="text-xl text-center mb-2">View Student</h1>
+                <h1 class="text-xl text-center mb-2">View Teachers</h1>
 
                 <?php
                 
@@ -137,7 +137,7 @@ $result = mysqli_query($connection, $sql);
                                     <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
                                         <?php
                                         echo "<a onClick=\" javascript:return confirm('Are You Sure You Want To Perform This Action'); \" 
-                                         href='delete_student.php?student_id={$info['id']}'>Delete</a>"
+                                         href='delete_teacher.php?teacher_id={$info['id']}'>Delete Teacher</a>"
 
                                         ?>
                                     </td>
@@ -145,7 +145,7 @@ $result = mysqli_query($connection, $sql);
                                     <td class="p-3 text-sm text-gray-700 whitespace-nowrap">
                                         <?php
                                         echo "<a  
-                                         href='update_student.php?student_id={$info['id']}'>Update</a>"
+                                         href='update_student.php?teacher_id={$info['id']}'>Update</a>"
 
                                         ?>
                                     </td>
